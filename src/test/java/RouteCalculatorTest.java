@@ -239,7 +239,7 @@ public class RouteCalculatorTest extends TestCase {
 
     @Override
     protected void tearDown() throws Exception {
-
-
+        connectedStations.clear();
+        connectedStations2.clear();
     }
 }
