@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN">
+    <appenders>
+        <File name="stationSearchByUser" fileName="logs/stationSearchByUser.log" immediateFlush="true">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+        <File name="stationsSearchNotValid" fileName="logs/stationsSearchNotValid.log" immediateFlush="true">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+        <File name="exeptions" fileName="logs/exeptions.log" immediateFlush="true">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+    </appenders>
+    <loggers>
+        <logger name="stationSearchByUser" level="info" additivity="false">
+            <appender-ref ref="stationSearchByUser"/>
+        </logger>
+
+        <logger name="stationsSearchNotValid" level="info" additivity="false">
+            <appender-ref ref="stationsSearchNotValid"/>
+        </logger>
+
+        <root level="error">
+            <appender-ref ref="exeptions"/>
+        </root>
+    </loggers>
+</configuration>
