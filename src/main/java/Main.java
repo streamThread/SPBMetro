@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static final Logger logger = LogManager.getRootLogger(Main.class);
+    private static final Logger rootLogger = LogManager.getRootLogger();
 
     private static String dataFile = "src/main/resources/map.json";
     private static Scanner scanner;
@@ -39,7 +39,7 @@ public class Main {
                         RouteCalculator.calculateDuration(route) + " минут");
                 throw new IOException();
             } catch (Exception e) {
-                logger.error(e);
+                rootLogger.error(e);
             }
         }
 
@@ -72,10 +72,10 @@ public class Main {
             String line = scanner.nextLine().trim();
             Station station = stationIndex.getStation(line);
             if (station != null) {
-                logger.info("Была запрошена и найдена станция: {}", line);
+                rootLogger.info("Была запрошена и найдена станция: {}", line);
                 return station;
             }
-            logger.warn("Станция не найдена: {}", line);
+            rootLogger.warn("Станция не найдена: {}", line);
             System.out.println("Станция не найдена :(");
         }
     }
