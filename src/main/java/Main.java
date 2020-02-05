@@ -1,10 +1,14 @@
 import core.Line;
 import core.Station;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -13,6 +17,10 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static final Logger rootLogger = LogManager.getRootLogger();
+    private static final Marker INPUT_HISTORY_MARKER = MarkerManager.getMarker("INPUT_HISTORY");
+    private static final Marker INVALID_STATIONS_MARKER = MarkerManager.getMarker("INVALID_STATIONS");
+
     private static String dataFile = "src/main/resources/map.json";
     private static Scanner scanner;
 
@@ -20,10 +28,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-            RouteCalculator calculator = getRouteCalculator();
-            System.out.println("Программа расчёта маршрутов метрополитена Санкт-Петербурга\n");
-            scanner = new Scanner(System.in);
-            for (; ; ) {try {
+        RouteCalculator calculator = getRouteCalculator();
+        System.out.println("Программа расчёта маршрутов метрополитена Санкт-Петербурга\n");
+        scanner = new Scanner(System.in);
+        for (; ; ) {
+            try {
                 Station from = takeStation("Введите станцию отправления:");
                 Station to = takeStation("Введите станцию назначения:");
 
@@ -32,10 +41,11 @@ public class Main {
                 printRoute(route);
                 System.out.println("Длительность: " +
                         RouteCalculator.calculateDuration(route) + " минут");
+                throw new IOException();
             } catch (Exception e) {
-                LogManager.getRootLogger().error(e);
+                rootLogger.error(e);
             }
-            }
+        }
 
     }
 
@@ -66,10 +76,10 @@ public class Main {
             String line = scanner.nextLine().trim();
             Station station = stationIndex.getStation(line);
             if (station != null) {
-                LogManager.getLogger("stationSearchByUser").info("Была запрошена и найдена станция: " + line);
+                rootLogger.info(INPUT_HISTORY_MARKER, "Была запрошена и найдена станция: {}", line);
                 return station;
             }
-            LogManager.getLogger("stationsSearchNotValid").info("Станция не найдена: " + line);
+            rootLogger.info(INVALID_STATIONS_MARKER, "Станция не найдена: {}", line);
             System.out.println("Станция не найдена :(");
         }
     }
