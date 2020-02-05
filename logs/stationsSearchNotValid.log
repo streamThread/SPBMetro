@@ -1,4 +1,2 @@
-23:01:59.079 [main] INFO  stationsSearchNotValid - Станция не найдена: вапав
-23:01:59.830 [main] INFO  stationsSearchNotValid - Станция не найдена: авп
-23:02:00.350 [main] INFO  stationsSearchNotValid - Станция не найдена: ыавп
-23:02:06.576 [main] INFO  stationsSearchNotValid - Станция не найдена: Фрунзенска
+2020-02-05 22:27:31.746 [main] WARN   - Станция не найдена: dgsdfg
+2020-02-05 22:27:33.162 [main] WARN   - Станция не найдена: fdga
